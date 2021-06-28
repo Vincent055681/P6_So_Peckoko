@@ -6,7 +6,7 @@ const sauceCtrl = require('../controllers/sauce')
 
 router.get('/', sauceCtrl.getAllSauces)
 // router.get("/:id", sauceCtrl.XXX)
-// router.post("/", sauceCtrl.XXX)
+router.post("/", sauceCtrl.createSauce)
 // router.put("/:id", sauceCtrl.XXX)
 // router.delete("/:id", sauceCtrl.XXX)
 
