@@ -8,7 +8,7 @@ const sauceCtrl = require("../controllers/sauce");
 router.get("/", auth, sauceCtrl.getAllSauces);
 router.get('/:id', auth, sauceCtrl.getOneSauce);
 router.post("/", auth, multer, sauceCtrl.createSauce);
-router.put("/:id", auth, multer, sauceCtrl.updateOne)
-router.delete("/:id", auth, sauceCtrl.deleteOne)
+router.put("/:id", auth, multer, sauceCtrl.updateSauce)
+router.delete("/:id", auth, sauceCtrl.deleteSauce)
 
 module.exports = router;
