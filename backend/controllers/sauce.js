@@ -29,9 +29,14 @@ exports.createSauce = (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 };
 
-// Fait à ma manière, pas comme dans le cours, je comprends mieux
 exports.updateOne = (req, res, next) => {
   Sauce.updateOne({ _id : req.params.id}, {...req.body, _id: req.params.id})
   .then(res.status(200).json({ message : "Sauce modifiée"}))
-  .catch(res.status(400).json({ error }))
+  .catch(error => res.status(400).json({ error }))
+}
+
+exports.deleteOne = (req, res, next) => {
+  Sauce.deleteOne({_id : req.params.id})
+  .then(res.status(200).json({ message: "Objet supprimé" }))
+  .catch(error => res.status(400).json({ error }))
 }
