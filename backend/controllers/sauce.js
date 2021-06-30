@@ -6,6 +6,12 @@ exports.getAllSauces = (req, res, next) => {
     .catch((error) => res.status(404).json({ error }));
 };
 
+exports.getOneSauce = (req, res, next) => {
+  Sauce.findOne({ _id: req.params.id })
+    .then(sauce => res.status(200).json(sauce))
+    .catch(error => res.status(404).json({ error }));
+}
+
 exports.createSauce = (req, res, next) => {
   const sauceObject = JSON.parse(req.body.sauce)
   delete sauceObject._id;
@@ -22,3 +28,10 @@ exports.createSauce = (req, res, next) => {
     .then(() => res.status(201).json({ message: "Objet enregistré" }))
     .catch((error) => res.status(400).json({ error }));
 };
+
+// Fait à ma manière, pas comme dans le cours, je comprends mieux
+exports.updateOne = (req, res, next) => {
+  Sauce.updateOne({ _id : req.params.id}, {...req.body, _id: req.params.id})
+  .then(res.status(200).json({ message : "Sauce modifiée"}))
+  .catch(res.status(400).json({ error }))
+}
