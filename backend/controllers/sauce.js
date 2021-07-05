@@ -69,7 +69,6 @@ exports.likeDislikeSauce = (req, res, next) => {
       break;
 
     case 0 :
-      if (like === 0) {
         Sauce.findOne({ _id: sauceId })
            .then((sauce) => {
             if (sauce.usersLiked.includes(userId)) { 
@@ -84,7 +83,6 @@ exports.likeDislikeSauce = (req, res, next) => {
             }
           })
           .catch((error) => res.status(404).json({ error }))
-      }
       break;
 
     case -1 :
