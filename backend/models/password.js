@@ -10,10 +10,4 @@ passwordSchema
 .has().digits()                                
 .has().not().spaces()                           
 
-console.log(passwordSchema.validate('validPASS123'));
-console.log(passwordSchema.validate('invalidPASS'));
-
-// Get a full list of rules which failed
-console.log(passwordSchema.validate('joke', { list: true }));
-
 module.exports = passwordSchema;
