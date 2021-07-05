@@ -61,13 +61,11 @@ exports.likeDislikeSauce = (req, res, next) => {
   let sauceId = req.params.id
   
   switch (like) {
-
     case 1 :
-      if (like === 1) { 
         Sauce.updateOne({ _id: sauceId }, { $push: { usersLiked: userId }, $inc: { likes: +1 }})
           .then(() => res.status(200).json({ message: `J'aime` }))
           .catch((error) => res.status(400).json({ error }))
-      }      
+            
       break;
 
     case 0 :
@@ -90,11 +88,9 @@ exports.likeDislikeSauce = (req, res, next) => {
       break;
 
     case -1 :
-      if (like === -1) {
         Sauce.updateOne({ _id: sauceId }, { $push: { usersDisliked: userId }, $inc: { dislikes: +1 }})
           .then(() => { res.status(200).json({ message: `Je n'aime pas` }) })
           .catch((error) => res.status(400).json({ error }))
-      }
       break;
       
       default:
