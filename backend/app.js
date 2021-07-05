@@ -2,14 +2,15 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const helmet = require('helmet');
+const path = require("path");
+require('dotenv').config();
 
 const userRoutes = require('./routes/user')
 const sauceRoutes = require('./routes/sauce');
-const path = require("path");
 
 mongoose
   .connect(
-    "mongodb+srv://userTest123:cerf0156HS@cluster0.uvhti.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    process.env.SECRET_DB,
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("Connexion à MongoDB réussie !"))
