@@ -6,7 +6,7 @@ require('dotenv').config();
 
 
 exports.signup = (req, res, next) => {
-  const hashedEmail = cryptojs.SHA256(req.body.email);
+  const hashedEmail = cryptojs.HmacSHA512(req.body.email, process.env.SECRET_CRYPTOJS_TOKEN).toString(cryptojs.enc.Base64);
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
       const user = new User({
@@ -17,11 +17,13 @@ exports.signup = (req, res, next) => {
         .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
         .catch(error => res.status(400).json({ error }));
     })
-    .catch(error => res.status(500).json({ error }));
+    .catch(error => { 
+      console.log(error)
+      return res.status(500).json({ error }) });
 };
 
 exports.login = (req, res, next) => {
-  const hashedEmail = cryptojs.SHA256(req.body.email);
+  const hashedEmail = cryptojs.HmacSHA512(req.body.email, process.env.SECRET_CRYPTOJS_TOKEN).toString(cryptojs.enc.Base64);
   User.findOne({ email: hashedEmail })
     .then(user => {
       if (!user) {
