@@ -1,8 +1,7 @@
 module.exports = (req, res, next) => {
-    const sauce = JSON.parse(req.body.sauce)
+    const sauce = req.body
     let {name, manufacturer, description, mainPepper} = sauce;
     let trimedTab = []
-    
     function toTrim(...string) {
          trimedTab = string.map((elt) => elt.trim());
     } 
